@@ -20,7 +20,12 @@ makeCacheMatrix<-function(m=matrix()){
 }
 
 
-## Write a short comment describing this function
+## takes matrix as arguement
+## first checks if we have already cahced the matrix inverse
+## if we have not then we set the data variable to matrix
+## we then check if matrix is square (only square matrices are invertible)
+## if matrix is invertible then we store matrix inverse in i and return i
+## if matrix is not invertible we say matrix is not square and return NULL
 
 cacheSolve<-function(m,...){
         i<-m$getinverse()
@@ -28,11 +33,11 @@ cacheSolve<-function(m,...){
                 message("getting cached data")
                 return(i)
         }
-        data<-x$getMatrix()
+        data<-m$getMatrix()
         if(dim(data)[1]==dim(data)[2]){
         	i<-solve(data,...)
-        	x$setinverse(i)
-        	return(m)
+        	m$setinverse(i)
+        	return(i)
         }else{
         	message("Matrix not Square! Returning NULL")
 			return(NULL)
